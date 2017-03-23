@@ -1,0 +1,49 @@
+##########################################################
+## Copyright notice
+## (c) {|EXTENSION_GENERATE_YEAR|} {|EXTENSION_AUTHOR_NAME|}
+##########################################################
+
+#################################
+## Include CSS/Javascript libraries
+page.includeJSLibs.jquery-ui = {$site.theme.lib}jquery-ui/jquery-ui.min.js
+page.includeJSLibs.jquery-ui.forceOnTop = 1
+page.includeCSS.jquery-ui = {$site.theme.lib}jquery-ui/jquery-ui.min.css
+
+page.includeJSLibs.jquery = {$site.theme.lib}jquery/jquery-2.1.4.min.js
+page.includeJSLibs.jquery.forceOnTop = 1
+
+page.includeJSLibs.swipebox = {$site.theme.lib}jquery-swipebox/js/jquery.swipebox.min.js
+page.includeCSS.jquery-swipebox = {$site.theme.lib}jquery-swipebox/css/swipebox.min.css
+
+page.includeCSS.font-awesome = {$site.theme.lib}font-awesome/css/font-awesome.min.css
+#################################
+
+#################################
+## Include google fonts
+#page.includeCSS.montserrat = http://fonts.googleapis.com/css?family=Montserrat:400,700
+#page.includeCSS.montserrat{
+#    disableCompression = 1
+#    excludeFromConcatenation = 1
+#    external = 1
+#}
+#################################
+
+#################################
+## Stylesheets Inclusion
+page.includeCSS.rte = {$site.theme.css}rte-base.css
+page.includeCSS.main = {$site.theme.css}styles.css
+#################################
+
+
+#################################
+## Javascript Inclusion
+page.includeJS.main = {$site.theme.js}main.js
+#################################
+
+#################################
+## Time rendering
+temp.time{
+    stdWrap.wrap = |-3600
+    prioriCalc = 1
+}
+#################################

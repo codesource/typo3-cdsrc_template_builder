@@ -1,0 +1,29 @@
+##########################################################
+## Copyright notice
+## (c) {|EXTENSION_GENERATE_YEAR|} {|EXTENSION_AUTHOR_NAME|}
+##########################################################
+
+#################################
+## Include configurations
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{|EXTENSION_KEY|}/Configuration/TypoScript/Config/css_styled_content.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{|EXTENSION_KEY|}/Configuration/TypoScript/Config/global.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{|EXTENSION_KEY|}/Configuration/TypoScript/Config/grid.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{|EXTENSION_KEY|}/Configuration/TypoScript/Config/languages.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{|EXTENSION_KEY|}/Configuration/TypoScript/Config/head.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{|EXTENSION_KEY|}/Configuration/TypoScript/Config/extensions.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{|EXTENSION_KEY|}/Configuration/TypoScript/Config/user.txt">
+#################################
+
+#################################
+## Include typeNum
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{|EXTENSION_KEY|}/Configuration/TypoScript/TypeNum/000-default.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{|EXTENSION_KEY|}/Configuration/TypoScript/TypeNum/002-robots.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{|EXTENSION_KEY|}/Configuration/TypoScript/TypeNum/003-sitemap.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{|EXTENSION_KEY|}/Configuration/TypoScript/TypeNum/099-text.txt">
+#################################
+
+#################################
+## Include contents
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{|EXTENSION_KEY|}/Configuration/TypoScript/Contents/header.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{|EXTENSION_KEY|}/Configuration/TypoScript/Contents/footer.txt">
+#################################

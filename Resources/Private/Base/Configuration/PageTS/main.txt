@@ -1,0 +1,2 @@
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{|EXTENSION_KEY|}/Configuration/PageTS/_global.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{|EXTENSION_KEY|}/Configuration/PageTS/_rte.txt">

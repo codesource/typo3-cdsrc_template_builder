@@ -1,0 +1,29 @@
+{namespace core=TYPO3\CMS\Core\ViewHelpers}
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
+<f:layout name="Default"/>
+
+<f:section name="iconButtons">
+    <div class="menuItems">
+		<span class="menuItem newItem" data-action="createNewTemplate" title="{f:translate(key:'button.createTemplate')}">
+			<core:icon identifier="icon-actions-document-new"/>
+		</span>
+    </div>
+</f:section>
+
+<f:section name="content">
+    <h1>
+        <f:translate key="header.index.title"/>
+    </h1>
+    <p>
+        <f:translate key="header.index.bodytext"/>
+    </p>
+    <a href="{f:uri.action(action:'new')}" class="btn btn-primary btn-lg" role="button">
+        <span class="fa fa-plus"></span>
+        <f:translate key="action.new"/>
+    </a>
+</f:section>
+
+</html>

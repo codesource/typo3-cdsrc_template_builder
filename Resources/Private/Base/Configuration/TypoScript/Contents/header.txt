@@ -1,0 +1,38 @@
+##########################################################
+## Copyright notice
+## (c) {|EXTENSION_GENERATE_YEAR|} {|EXTENSION_AUTHOR_NAME|}
+##########################################################
+
+#################################
+## Header Logo
+lib.header.logo = IMAGE
+lib.header.logo.file = EXT:backend/Resources/Public/Images/typo3-transparent@2x.png
+#################################
+
+#################################
+## Header menu
+lib.header.menu = HMENU
+lib.header.menu{
+    entryLevel = 0
+    1 = TMENU
+    1{
+        expAll = 1
+        wrap = <ul>|</ul>
+        NO = 1 
+        NO.wrapItemAndSub = <li>|</li> |*||*| <li class="last">|</li>
+        # If first page is a shortcut to home and is in menu
+        NO.ATagParams = class="active" |*|  |*|
+        NO.ATagParams.if{
+            value.data= tsfe:id
+            equals.data = leveluid:0
+        }
+        ACT < .NO
+        ACT.ATagParams >
+        ACT.ATagParams = class="active"
+    }
+    2 < .1
+    2{
+        wrap = <ul>|</ul>
+    }
+}
+#################################

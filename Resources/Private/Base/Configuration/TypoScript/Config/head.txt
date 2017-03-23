@@ -1,0 +1,676 @@
+##########################################################
+## Copyright notice
+## (c) {|EXTENSION_GENERATE_YEAR|} {|EXTENSION_AUTHOR_NAME|}
+##########################################################
+
+#################################
+## Remove google translation
+page.meta.google = notranslate
+#################################
+
+#################################
+## Viewport meta tags for mobiles
+page.meta.viewport = {$site.viewport}
+#################################
+
+#################################
+## Page title
+config.noPageTitle = 1
+page.headerData{
+    1 = COA
+    1{
+        stdWrap.noTrimWrap(
+|
+<title>|</title>|
+)
+        100 = HMENU
+        100{
+            special = rootline
+            special.range = 1|-1
+            special.reverseOrder = 1
+            1 = TMENU
+            1{
+                NO = 1
+                NO{
+                    doNotLinkIt = 1
+                    allWrap = |
+                    stdWrap.noTrimWrap = || - |
+                }
+            }
+        }
+        110 = TEXT
+        110{
+            value = {$site.name}
+            required = 1
+        }
+    }
+}
+#################################
+
+#################################
+## Language configuration in <head>
+page.headerData{
+    1486464200 = COA
+    1486464200{
+        10 = TEXT
+        10{
+            noTrimWrap(
+|
+<link rel="alternate" href="|" hreflang="fr"/>|
+)
+            typolink{
+                parameter.data = tsfe:id
+                additionalParams = &L={$site.languages.enabled.fr}
+                forceAbsoluteUrl = 1
+                returnLast = url
+            }
+            if{
+                value = {$site.languages.enabled.fr}
+                isLessThan = -1
+            }
+        }
+        20 < .10
+        20{
+            noTrimWrap(
+|
+<link rel="alternate" href="|" hreflang="de"/>|
+)
+            typolink.additionalParams = &L={$site.languages.enabled.de}
+            if.value = {$site.languages.enabled.de}
+        }
+        30 < .10
+        30{
+            noTrimWrap(
+|
+<link rel="alternate" href="|" hreflang="en"/>|
+)
+            typolink.additionalParams = &L={$site.languages.enabled.en}
+            if.value = {$site.languages.enabled.en}
+        }
+        40 < .10
+        40{
+            noTrimWrap(
+|
+<link rel="alternate" href="|" hreflang="it"/>|
+)
+            typolink.additionalParams = &L={$site.languages.enabled.it}
+            if.value = {$site.languages.enabled.it}
+        }
+    }
+}
+#################################
+
+#################################
+## Add canonical information in <head>
+page.headerData{
+    1486464860 = TEXT
+    1486464860{
+          typolink {
+              parameter.data = tsfe:id
+              additionalParams < config.sys_language_uid
+              additionalParams.wrap = &L=|
+              forceAbsoluteUrl = 1
+              returnLast = url
+          }
+          noTrimWrap(
+|
+<link rel="canonical" href="|" />|
+          )
+    }
+}
+#################################
+
+#################################
+## Add Open Graph Protocol meta tags
+page.headerData{
+    1341330266 = COA
+    1341330266{
+        if.isTrue = {$site.ogp_tag}
+        stdWrap{
+            required = 1
+            noTrimWrap(
+|
+||
+)
+        }
+        10 = TEXT
+        10{
+            noTrimWrap(
+|    
+<meta property="og:title" content="|" />|
+)
+            data = leveltitle:-1
+            htmlSpecialChars = 1
+        }
+        20 = TEXT
+        20{
+            noTrimWrap(
+|    
+<meta property="og:type" content="|" />|
+)
+            value = website
+        }
+        30 = TEXT
+        30{
+            noTrimWrap(
+|    
+<meta property="og:description" content="|" />|
+)
+            data = levelfield:-1,description
+            htmlSpecialChars = 1
+            required = 1
+        }
+        40 = TEXT
+        40{
+            cObject = TEXT
+            cObject{
+                data = levelmedia:-1
+                split{
+                    token = ,
+                    cObjNum = 1
+                    1{
+                        noTrimWrap(
+|    
+<meta property="og:image" content="{getIndpEnv:TYPO3_REQUEST_HOST}/|" />|
+)
+                        cObject = COA
+                        cObject{
+                            5 = IMG_RESOURCE
+                            5{
+                                file{
+                                    import = uploads/media/
+                                    import.current = 1
+                                }
+                            }
+                            if{
+                                value = gif,jpg,png
+                                isInList.current = 1
+                                isInList.substring = -3
+                            }
+                        }
+                        insertData = 1
+                        required = 1
+                    }
+                }
+            }
+            ifEmpty.cObject = CONTENT
+            ifEmpty.cObject{
+                select{
+                    pidInList.data = leveluid:-1
+                    where.dataWrap = (CType = 'textpic' OR CType = 'image')
+                    languageField = sys_language_uid
+                }
+                table = tt_content
+                renderObj = TEXT
+                renderObj{
+                    field = image
+                    split{
+                        token = ,
+                        cObjNum = 1
+                        1{
+                            noTrimWrap(
+|    
+<meta property="og:image" content="{getIndpEnv:TYPO3_REQUEST_HOST}/|" />|
+)
+                            cObject = IMG_RESOURCE
+                            cObject{
+                                file{
+                                    ext = jpg
+                                    import = uploads/pics/
+                                    import.current = 1
+                                    width = 250c.height
+                                    height = 250c.width
+                                }
+                            }
+                            insertData = 1
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+#################################
+
+#################################
+## Geo-Tag definition 
+page.headerData{
+    1345193127 = COA
+    1345193127{
+        if.isTrue = {$site.geo_tag}
+        stdWrap{
+            required = 1
+            noTrimWrap(
+|
+||
+)
+        }
+        20 = TEXT
+        20{
+            noTrimWrap(
+|    
+<meta name="geo.region" content="|" />|
+)
+            value = {$site.geo_tag.region}
+            required = 1
+        }
+        30 = TEXT
+        30{
+            noTrimWrap(
+|    
+<meta name="geo.placename" content="|" />|
+)
+            value = {$site.geo_tag.placename}
+            htmlSpecialChars = 1
+            required = 1
+        }
+        40 = TEXT
+        40{
+            noTrimWrap(
+|    
+<meta name="geo.position" content="|" />|
+)
+            value = {$site.geo_tag.position.latitude};{$site.geo_tag.position.longitude}
+            if.isTrue = {$site.geo_tag.position.latitude}
+            if.isTrue.if.isTrue = {$site.geo_tag.position.longitude}
+        }
+        50 = TEXT
+        50{
+            noTrimWrap(
+|    
+<meta name="ICBM" content="|" />|
+)
+            value = {$site.geo_tag.position.latitude}, {$site.geo_tag.position.longitude}
+            if.isTrue = {$site.geo_tag.position.latitude}
+            if.isTrue.if.isTrue = {$site.geo_tag.position.longitude}
+        }
+    }
+}
+#################################
+
+#################################
+## Meta tags definition
+page.headerData{
+    1367749114 = COA
+    1367749114{
+        stdWrap{
+            required = 1
+            noTrimWrap(
+|
+||
+)
+        }
+        10 = TEXT
+        10{
+            noTrimWrap(
+|    
+<meta name="description" content="|" />|
+)
+            data = levelfield:-1,description,slide
+            ifEmpty = {$site.meta_tag.description}
+            required = 1
+        }
+        20 = TEXT
+        20{
+            noTrimWrap(
+|    
+<meta name="keywords" content="|" />|
+)
+            data = levelfield:-1, keywords, slide
+            ifEmpty = {$site.meta_tag.keywords}
+            required = 1
+        }
+        30 = TEXT
+        30{
+            noTrimWrap(
+|    
+<meta name="author" content="|" />|
+)
+            data = levelfield:-1, author, slide
+            ifEmpty = {$site.meta_tag.author}
+            required = 1
+        }
+        40 = TEXT
+        40{
+            noTrimWrap(
+|    
+<meta name="abstract" content="|" />|
+)
+            data = levelfield :-1, abstract, slide
+            ifEmpty = {$site.meta_tag.abstract}
+            required = 1
+        }
+        50 = TEXT
+        50{
+            noTrimWrap(
+|    
+<meta name="copyright" content="|" />|
+)
+            value = {$site.meta_tag.copyright}
+            if.isTrue = {$site.meta_tag.copyright}
+        }
+        60 = TEXT
+        60{
+            noTrimWrap(
+|    
+<meta name="robots" content="|" />|
+)
+            value = {$site.meta_tag.robots}
+            if.isTrue = {$site.meta_tag.robots}
+        }
+    }
+}
+#################################
+
+#################################
+## Dublin Core Meta Tags definition
+page.headerData{
+    1367752322 = COA
+    1367752322{
+        if.isTrue = {$site.dc_tag}
+        stdWrap.noTrimWrap(
+|
+||
+)
+        10 = TEXT
+        10{
+            noTrimWrap(
+|    
+<meta name="DC.title" content="|" />|
+)
+            data = leveltitle:-1,slide
+            htmlSpecialChars = 1
+            required = 1
+        }
+        20 = TEXT
+        20{
+            noTrimWrap(
+|    
+<meta name="DC.creator" content="|" />|
+)
+            data = levelfield:-1, author, slide
+            ifEmpty = {$site.dc_tag.creator}
+            required = 1
+        }
+        30 = TEXT
+        30{
+            noTrimWrap(
+|    
+<meta name="DC.subject" content="|" />|
+)
+            data = levelfield:-1, keywords, slide
+            ifEmpty = {$site.dc_tag.subject}
+            required = 1
+        }
+        40 = TEXT
+        40{
+            noTrimWrap(
+|    
+<meta name="DC.description" content="|" />|
+)
+            data = levelfield:-1, description, slide
+            ifEmpty = {$site.dc_tag.description}
+            required = 1
+        }
+        50 = TEXT
+        50{
+            noTrimWrap(
+|    
+<meta name="DC.publisher" content="|" />|
+)
+            data = levelfield:-1, author, slide
+            ifEmpty = {$site.dc_tag.publisher}
+            required = 1
+        }
+        60 = TEXT
+        60{
+            noTrimWrap(
+|    
+<meta name="DC.contributor" content="|" />|
+)
+            value = {$site.dc_tag.contributor}
+            required = 1
+        }
+        70 = TEXT
+        70{
+            noTrimWrap(
+|    
+<meta name="DC.date" content="|" />|
+)
+            data = page:lastUpdated
+            date = Y-m-d
+            ifEmpty.data = register:SYS_LASTCHANGED
+            required = 1
+        }
+        80 = TEXT
+        80{
+            noTrimWrap(
+|    
+<meta name="DC.type" content="|" />|
+)
+            value = {$site.dc_tag.type}
+            required = 1
+        }
+        90 = TEXT
+        90{
+            noTrimWrap(
+|    
+<meta name="DC.format" content="|" />|
+)
+            value = {$site.dc_tag.format}
+            required = 1
+        }
+        100 = TEXT
+        100{
+            noTrimWrap(
+|    
+<meta name="DC.identifier" content="|" />|
+)
+            typolink.parameter.dataWrap = |#up-{tsfe:id}
+            typolink.parameter.data = tsfe:id
+            typolink.forceAbsoluteUrl = 1
+            typolink.returnLast = url
+        }
+        110 = TEXT
+        110{
+            noTrimWrap(
+|    
+<meta name="DC.source" content="|" />|
+)
+            value = {$site.dc_tag.source}
+            required = 1
+        }
+        120 = TEXT
+        120{
+            noTrimWrap(
+|    
+<meta name="DC.language" content="|" />|
+)
+            value < config.language
+            required = 1
+        }
+        130 = TEXT
+        130{
+            noTrimWrap(
+|    
+<meta name="DC.relation" content="|" />|
+)
+            value = {$site.dc_tag.relation}
+            required = 1
+        }
+        140 = TEXT
+        140{
+            noTrimWrap(
+|    
+<meta name="DC.coverage" content="|" />|
+)
+            value = {$site.dc_tag.coverage}
+            required = 1
+        }
+        150 = TEXT
+        150{
+            noTrimWrap(
+|    
+<meta name="DC.rights" content="|" />|
+)
+            value = {$site.dc_tag.rights}
+            required = 1
+        }
+    }
+}
+
+#################################
+
+#################################
+## Google analytics
+page.jsInline{
+    1367745674 = COA
+    1367745674{
+        10 = TEMPLATE
+        10{
+            template = FILE
+            template.file = {$site.theme.templates}google-analytics.js
+            marks{
+                CODE = TEXT
+                CODE.value = {$site.ga.key}
+            }
+        }
+        if{
+            isTrue = {$site.ga.key}
+            isFalse = {$site.gtm.key}
+        }
+    }
+}
+#################################
+
+#################################
+## Google tag manager
+page.headerData{
+    100 = COA
+    100{
+        10 = TEMPLATE
+        10{
+            stdWrap.noTrimWrap(
+|
+<script>|</script>|
+            )
+            template = FILE
+            template.file = {$site.theme.templates}google-tag-manager.js
+            marks{
+                CODE = TEXT
+                CODE.value = {$site.gtm.key}
+            }
+        }
+        if.isTrue = {$site.gtm.key}
+    }
+}
+page.5 = TEXT
+page.5{
+    value = <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={$site.gtm.key}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    if.isTrue = {$site.gtm.key}
+}
+#################################
+
+#################################
+## Google web master tools
+page.meta.google-site-verification = {$site.gwmt.key}
+#################################
+
+#################################
+## Bing web master tools
+page.headerData{
+    1367744099 = TEXT
+    1367744099{
+        wrap = <meta name="msvalidate.01" content="|" />
+        value = {$site.bwmt.key}
+        if.isTrue = {$site.bwmt.key}
+    }
+}
+#################################
+
+#################################
+## HTML Tag
+config.htmlTag_stdWrap{
+    wrap = <html|>
+    cObject = COA
+    cObject{
+        10 = TEXT
+        10{
+            noTrimWrap = | lang="|"|
+            value < config.language
+        }
+        20 = TEXT
+        20{
+            noTrimWrap = | class="|"|
+            value = no-js
+        }
+    }
+}
+#################################
+
+#################################
+## Favicon from folder
+page.headerData{
+    1389000000 = COA
+    1389000000{
+        if.isTrue = {$site.favicon_path}
+        10 = TEXT
+        10{
+            noTrimWrap(
+|
+<link rel="shortcut icon" href="|" type="image/x-icon" /> |
+            )
+            value = {$site.favicon_path}favicon.ico
+        }
+        20  = TEXT
+        20{
+            noTrimWrap(
+|
+||
+            )
+            stdWrap.wrap = <link rel="apple-touch-icon" href="|" />
+            value = {$site.favicon_path}apple-touch-icon.png
+        }
+        30 < .20
+        30{
+            value = {$site.favicon_path}apple-touch-icon-57x57.png
+            addParams.sizes = 57x57
+        }
+        40 < .20
+        40{
+            value = {$site.favicon_path}apple-touch-icon-72x72.png
+            addParams.sizes = 72x72
+        }
+        50 < .20
+        50{
+            value = {$site.favicon_path}apple-touch-icon-76x76.png
+            addParams.sizes = 76x76
+        }
+        60 < .20
+        60{
+            value = {$site.favicon_path}apple-touch-icon-114x114.png
+            addParams.sizes = 114x114
+        }
+        70 < .20
+        70{
+            value = {$site.favicon_path}apple-touch-icon-120x120.png
+            addParams.sizes = 120x120
+        }
+        80 < .20
+        80{
+            value = {$site.favicon_path}apple-touch-icon-144x144.png
+            addParams.sizes = 144x144
+        }
+        90 < .20
+        90{
+            value = {$site.favicon_path}apple-touch-icon-152x152.png
+            addParams.sizes = 152x152
+        }
+        100 < .20
+        100{
+            value = {$site.favicon_path}apple-touch-icon-180x180.png
+            addParams.sizes = 180x180
+        }
+    }
+}
+#################################

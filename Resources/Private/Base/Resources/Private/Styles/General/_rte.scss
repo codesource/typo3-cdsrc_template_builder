@@ -1,0 +1,104 @@
+/****************************************************************************
+    *** TYPO3 RICHTEXT CSS FILE
+    ***
+    *** This file contains:
+    ***    - Importations
+    ***    - RTE Base
+    ***    - RTE Text alignment
+    ***    - RTE Anchor classes
+    ***
+    *** Author: {|EXTENSION_AUTHOR_NAME|}
+    *** Copyright: {|EXTENSION_AUTHOR_COMPANY|}
+    ***
+*****************************************************************************/
+
+/**********************************************************
+    *****  Importations
+**********************************************************/
+@import "../constants";
+@import "../Helpers/mixins";
+
+/**********************************************************
+    *****  RTE - Base
+**********************************************************/
+@include rte {
+  font-family: $font-family;
+  font-size: 0.75em;
+  line-height: 1.25em;
+  a {
+    color: $a-color;
+  }
+  p {
+    padding-bottom: 0.4em;
+  }
+  dl {
+    list-style: none;
+    padding-bottom: 1em;
+    padding-left: 2em;
+  }
+  ol {
+    list-style: decimal;
+    padding-bottom: 1em;
+    padding-left: 2em;
+  }
+  ul {
+    list-style: disc;
+    padding-bottom: 1em;
+    padding-left: 2em;
+  }
+  li {
+    padding-bottom: 0.2em;
+  }
+}
+
+/**********************************************************
+    *****  RTE - Text alignment
+**********************************************************/
+@include rte {
+  div,
+  p,
+  span,
+  td,
+  th {
+    .align-left {
+      text-align: left;
+    }
+    .align-right {
+      text-align: right;
+    }
+    .align-center {
+      text-align: center;
+    }
+    .align-justify {
+      text-align: justify;
+    }
+    .indent {
+      padding-left: 1.5em;
+    }
+  }
+}
+
+/**********************************************************
+    *****  RTE - Anchor classes
+**********************************************************/
+@include rte {
+  a {
+    &:visited,
+    &:hover {
+    }
+    &.external-link {
+    }
+    &.xternal-link-new-window {
+    }
+    &.internal-link {
+    }
+    &.internal-link-new-window {
+    }
+    &.download {
+    }
+    &.mail {
+    }
+  }
+}
+
+

@@ -1,0 +1,8 @@
+# Default page access
+#TCEMAIN {
+#    permissions{
+#        groupid = 1
+#        user = 31
+#        group = 31
+#    }
+#}

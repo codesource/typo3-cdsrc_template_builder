@@ -1,0 +1,93 @@
+##########################################################
+## Copyright notice
+## (c) {|EXTENSION_GENERATE_YEAR|} {|EXTENSION_AUTHOR_NAME|}
+##########################################################
+
+#################################
+## Cache
+config.cache_clearAtMidnight = 1
+config.cache_period = 600
+config.no_cache = 0
+config.sendCacheHeaders = 1
+config.sendCacheHeaders_onlyWhenLoginDeniedInBranch = 0
+#################################
+
+#################################
+## Remove admin panel
+config.admPanel = 0
+#################################
+
+#################################
+## JS + CSS Concatenation/Compression
+config.concatenateCss = {$site.cc_jscss}
+config.concatenateJs = {$site.cc_jscss}
+config.compressCss = {$site.cc_jscss}
+config.compressJs = {$site.cc_jscss}
+#################################
+
+#################################
+## Header manipulation
+config.disableCharsetHeader = 0
+config.disablePrefixComment = 1
+config.doctype = html5
+config.enableContentLengthHeader = 1
+config.headerComment = Integration: {|EXTENSION_AUTHOR_COMPANY|} ({|EXTENSION_AUTHOR_COMPANY_WEBSITE|})
+config.moveJsFromHeaderToFooter = 1
+#################################
+
+#################################
+## HTML generation
+config.extTarget = _blank
+config.meaningfulTempFilePrefix = 50
+config.removeDefaultJS = external
+config.prefixLocalAnchors =
+config.typolinkCheckRootline = 1
+config.typolinkEnableLinksAcrossDomains = 1
+config.xhtml_cleaning = all
+config.xmlprologue = none
+#################################
+
+#################################
+## Charset
+config.metaCharset = utf-8
+config.renderCharset = utf-8
+#################################
+
+#################################
+## Email spam protection
+config.spamProtectEmailAddresses = -2
+config.spamProtectEmailAddresses_atSubst = (at)
+config.spamProtectEmailAddresses_lastDotSubst = .
+#################################
+
+#################################
+## Language definition
+config.htmlTag_dir =
+config.htmlTag_langKey = {$site.languages.default.key}
+config.language = {$site.languages.default.key}
+config.linkVars = L
+config.defaultGetVars.L = 0
+config.locale_all = {$site.languages.default.locale}
+config.sys_language_mode = content_fallback
+config.sys_language_overlay = 1
+config.sys_language_uid = 0
+#################################
+
+#################################
+## Statistics
+config.stat = 0
+config.stat_apache = 0
+config.stat_mysql = 0
+#################################
+
+#################################
+## Indexation
+config.index_enable = 1
+config.index_externals = 1
+config.index_metatags = 0
+#################################
+
+#################################
+## Debugging
+config.contentObjectExceptionHandler = 0
+#################################

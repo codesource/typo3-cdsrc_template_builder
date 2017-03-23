@@ -1,0 +1,16 @@
+/****************************************************************************
+    *** GENERAL FUNCTION FILE
+    ***
+    *** This file contains all functions for SCSS generation
+    ***
+    *** Author: Matthias Toscanelli
+    *** Copyright: Code-Source
+    ***
+*****************************************************************************/
+
+/******************************************************************************
+    *** CALCULATE EM BY PIXEL
+******************************************************************************/
+@function em-size($size, $reference:16){
+  @return ($size / $reference) * 1em;
+}

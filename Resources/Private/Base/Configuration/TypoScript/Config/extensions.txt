@@ -1,0 +1,22 @@
+##########################################################
+## Copyright notice
+## (c) {|EXTENSION_GENERATE_YEAR|} {|EXTENSION_AUTHOR_NAME|}
+##########################################################
+
+#################################
+## Remove default tx_form CSS
+plugin.tx_form {
+    _CSS_DEFAULT_STYLE >
+}
+#################################
+
+#################################
+## Enable realURL
+config{
+  simulateStaticDocuments = 0
+  prefixLocalAnchors = all
+  tx_realurl_enable = 1
+  ## Fix broken inter-domain links
+  typolinkCheckRootline = 1
+}
+#################################

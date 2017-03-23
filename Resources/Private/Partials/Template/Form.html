@@ -1,0 +1,70 @@
+{namespace c=CDSRC\CdsrcTemplateBuilder\ViewHelpers}
+<div class="container-fluid row">
+    <f:form action="create" object="{template}" objectName="template" method="post">
+        <ul class="nav nav-pills nav-stacked col-xs-2" role="tablist">
+            <li class="active">
+                <c:form.ifError properties="{
+                        0: 'template.name',
+                        1: 'template.key',
+                        2: 'template.description'
+                    }"
+                >
+                    <f:then>
+                        <a href="#template-form-general" role="tab" data-toggle="tab" class="alert-danger">
+                            <i class="fa fa-warning"></i>
+                            <f:translate key="fieldset.general"/>
+                        </a>
+                    </f:then>
+                    <f:else>
+                        <a href="#template-form-general" role="tab" data-toggle="tab">
+                            <f:translate key="fieldset.general"/>
+                        </a>
+                    </f:else>
+                </c:form.ifError>
+            </li>
+            <li>
+                <c:form.ifError properties="{
+                        0: 'template.authorName',
+                        1: 'template.authorEmail',
+                        2: 'template.authorCompany',
+                        3: 'template.authorCompanyWebsite'
+                    }"
+                >
+                    <f:then>
+                        <a href="#template-form-author" role="tab" data-toggle="tab" class="alert-danger">
+                            <i class="fa fa-warning"></i>
+                            <f:translate key="fieldset.author"/>
+                        </a>
+                    </f:then>
+                    <f:else>
+                        <a href="#template-form-author" role="tab" data-toggle="tab">
+                            <f:translate key="fieldset.author"/>
+                        </a>
+                    </f:else>
+                </c:form.ifError>
+            </li>
+            <li>
+                <a href="#template-form-dependencies" role="tab" data-toggle="tab">
+                    <f:translate key="fieldset.dependencies"/>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content col-xs-10">
+            <div class="tab-pane fade in active" id="template-form-general">
+                <f:render partial="Template/Steps/General" arguments="{_all}"/>
+            </div>
+            <div class="tab-pane fade" id="template-form-author">
+                <f:render partial="Template/Steps/Author" arguments="{_all}"/>
+            </div>
+            <div class="tab-pane fade" id="template-form-dependencies">
+                <f:render partial="Template/Steps/Dependencies" arguments="{_all}"/>
+            </div>
+        </div>
+        <div class="command col-xs-offset-2 col-xs-10">
+            <a href="{f:uri.action(action:'index')}" class="btn btn-default" role="button">
+                <f:translate key="action.cancel"/>
+            </a>
+            <f:form.submit name="create" class="btn btn-primary" value="{f:translate(id:'action.create')}"/>
+        </div>
+    </f:form>
+</div>

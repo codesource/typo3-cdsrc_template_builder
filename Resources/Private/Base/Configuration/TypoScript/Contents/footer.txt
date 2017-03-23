@@ -1,0 +1,23 @@
+##########################################################
+## Copyright notice
+## (c) {|EXTENSION_GENERATE_YEAR|} {|EXTENSION_AUTHOR_NAME|}
+##########################################################
+
+#################################
+## Main menu
+lib.footer.copyright = COA
+lib.footer.copyright{
+    10 = TEXT
+    10{
+        wrap = &copy;|
+        date = Y
+    }
+    20 = TEXT
+    20{
+        noTrimWrap = | ||
+        value = {|EXTENSION_AUTHOR_NAME|}
+        typolink.parameter = {|EXTENSION_AUTHOR_EMAIL|}
+        typolink.parameter.if.isTrue = {|EXTENSION_AUTHOR_EMAIL|}
+    }
+}
+#################################

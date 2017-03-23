@@ -1,0 +1,68 @@
+
+RTE.classes{
+
+}
+
+RTE.default {
+  contentCSS = {|EXTENSION_PATH|}Resources/Public/Css/rte-htmlarea.css
+  ignoreMainStyleOverride = 3
+  removeTrailingBR = 0
+  showButtons = blockstyle,textstyle,bold,italic,underline,strikethrough,subscript,superscript,left,center,right,justifyfull,orderedlist,unorderedlist,outdent,indent,undo,redo,removeformat,textcolor,bgcolor,chMode,line,formatblock,link,table,toggleborders,tableproperties,rowproperties,rowinsertabove,rowinsertunder,rowdelete,rowsplit,columninsertbefore,columninsertafter,columndelete,columnsplit,cellproperties,cellinsertbefore,cellinsertafter,celldelete,cellsplit,cellmerge
+  toolbarOrder(
+    formatblock,blockstyle,textstyle,linebreak,bold,italic,underline,strikethrough,subscript,superscript,bar,left,center,right,justifyfull,bar,orderedlist,unorderedlist,outdent,indent,linebreak,
+    link,bar,removeformat,textcolor,bgcolor,bar,undo,redo,bar,chMode,line,linebreak,linebreak,
+    table,bar,toggleborders,bar,tableproperties,rowproperties,cellproperties,bar,rowinsertabove,rowinsertunder,rowdelete,rowsplit,bar,columninsertbefore,columninsertafter,columndelete,columnsplit,bar,cellinsertbefore,cellinsertafter,celldelete,cellsplit,bar,cellmerge
+  )
+  proc{
+    allowTags := addToList(u)
+    allowTags := removeFromList(abbr,acronym,address,article,aside,b,bdo,big,blockquote,caption,center,cite,code,footer,h4,h5,h6,header,img,ins,kbd,meta,nav,pre,q,samp,sdfield,section,title,var)
+    entryHTMLparser_db{
+      allowTags < RTE.default.proc.allowTags
+      tags.u.allowedAttribs = id, title, dir, lang, xml:lang, class, style
+      removeTags := removeFromList(u, strike)
+    }
+  }
+  removeTags := removeFromList(u, strike)
+
+  buttons{
+    formatblock{
+        removeItems := addToList(address,article,aside,blockquote,caption,center,div,footer,h4,h5,h6,header,nav,section)
+    }
+  }
+
+  disableAlignmentFieldsetInTableOperations = 0
+  disableSpacingFieldsetInTableOperations = 0
+  disableColorFieldsetInTableOperations = 0
+  disableLayoutFieldsetInTableOperations = 0
+  disableBordersFieldsetInTableOperations = 0
+}
+RTE.classesAnchor {
+  externalLink {
+    altText =
+    titleText =
+  }
+  externalLinkInNewWindow {
+    altText =
+    titleText =
+  }
+  internalLink {
+    altText =
+    titleText =
+  }
+  internalLinkInNewWindow {
+    altText =
+    titleText =
+  }
+  download {
+    altText =
+    titleText =
+  }
+  mail {
+    altText =
+    titleText =
+  }
+}
+RTE.default.FE < RTE.default
+RTE.default.FE.FE >
+RTE.default.FE.userElements >
+RTE.default.FE.userLinks >

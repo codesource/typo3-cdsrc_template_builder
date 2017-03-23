@@ -1,0 +1,130 @@
+##########################################################
+## Copyright notice
+## (c) {|EXTENSION_GENERATE_YEAR|} {|EXTENSION_AUTHOR_NAME|}
+##########################################################
+
+#################################
+## Set languages configurations
+
+## French
+temp.config_fr < config
+[globalVar = LIT:-1 < {$site.languages.enabled.fr}]
+    temp.config_fr.htmlTag_langKey = fr
+    temp.config_fr.language = fr
+    temp.config_fr.locale_all = fr_CH.UTF8
+    temp.config_fr.sys_language_uid = {$site.languages.enabled.fr}
+[GLOBAL]
+
+## German
+temp.config_de < config
+[globalVar = LIT:-1 < {$site.languages.enabled.de}]
+    temp.config_de.htmlTag_langKey = de
+    temp.config_de.language = de
+    temp.config_de.locale_all = de_CH.UTF8
+    temp.config_de.sys_language_uid = {$site.languages.enabled.de}
+[GLOBAL]
+
+## English
+temp.config_en < config
+[globalVar = LIT:-1 < {$site.languages.enabled.en}]
+    temp.config_en.htmlTag_langKey = en
+    temp.config_en.language = en
+    temp.config_en.locale_all = en_GB.UTF8
+    temp.config_en.sys_language_uid = {$site.languages.enabled.en}
+[GLOBAL]
+
+## Italian
+temp.config_it < config
+[globalVar = LIT:-1 < {$site.languages.enabled.it}]
+    temp.config_it.htmlTag_langKey = it
+    temp.config_it.language = it
+    temp.config_it.locale_all = it_IT.UTF8
+    temp.config_it.sys_language_uid = {$site.languages.enabled.it}
+[GLOBAL]
+#################################
+
+#################################
+## Set language default language
+[globalVar = LIT:fr = {$site.languages.default.key}]
+    config < temp.config_en
+    config.defaultGetVars.L = {$site.languages.enabled.fr}
+    plugin.tx_indexedsearch._DEFAULT_PI_VARS.lang = {$site.languages.enabled.fr}
+    plugin.tx_indexedsearch.settings.defaultOptions.languageUid = {$site.languages.enabled.fr}
+[GLOBAL]
+[globalVar = LIT:de = {$site.languages.default.key}]
+    config < temp.config_de
+    config.defaultGetVars.L = {$site.languages.enabled.de}
+    plugin.tx_indexedsearch._DEFAULT_PI_VARS.lang = {$site.languages.enabled.de}
+    plugin.tx_indexedsearch.settings.defaultOptions.languageUid = {$site.languages.enabled.de}
+[GLOBAL]
+[globalVar = LIT:en = {$site.languages.default.key}]
+    config < temp.config_en
+    config.defaultGetVars.L = {$site.languages.enabled.en}
+    plugin.tx_indexedsearch._DEFAULT_PI_VARS.lang = {$site.languages.enabled.en}
+    plugin.tx_indexedsearch.settings.defaultOptions.languageUid = {$site.languages.enabled.en}
+[GLOBAL]
+[globalVar = LIT:it = {$site.languages.default.key}]
+    config < temp.config_it
+    config.defaultGetVars.L = {$site.languages.enabled.it}
+    plugin.tx_indexedsearch._DEFAULT_PI_VARS.lang = {$site.languages.enabled.it}
+    plugin.tx_indexedsearch.settings.defaultOptions.languageUid = {$site.languages.enabled.it}
+[GLOBAL]
+#################################
+
+#################################
+## Set language based on language detection
+[globalVar = LIT:1 = {$site.languages.keyboardDetectionEnabled}] && [globalString = _SERVER|HTTP_ACCEPT_LANGUAGE = fr*]
+    config < temp.config_fr
+    plugin.tx_indexedsearch._DEFAULT_PI_VARS.lang = {$site.languages.enabled.fr}
+    plugin.tx_indexedsearch.settings.defaultOptions.languageUid = {$site.languages.enabled.fr}
+[GLOBAL]
+[globalVar = LIT:1 = {$site.languages.keyboardDetectionEnabled}] && [globalString = _SERVER|HTTP_ACCEPT_LANGUAGE = de*]
+    config < temp.config_de
+    plugin.tx_indexedsearch._DEFAULT_PI_VARS.lang = {$site.languages.enabled.de}
+    plugin.tx_indexedsearch.settings.defaultOptions.languageUid = {$site.languages.enabled.de}
+[GLOBAL]
+[globalVar = LIT:1 = {$site.languages.keyboardDetectionEnabled}] && [globalString = _SERVER|HTTP_ACCEPT_LANGUAGE = en*]
+    config < temp.config_en
+    plugin.tx_indexedsearch._DEFAULT_PI_VARS.lang = {$site.languages.enabled.en}
+    plugin.tx_indexedsearch.settings.defaultOptions.languageUid = {$site.languages.enabled.en}
+[GLOBAL]
+[globalVar = LIT:1 = {$site.languages.keyboardDetectionEnabled}] && [globalString = _SERVER|HTTP_ACCEPT_LANGUAGE = it*]
+    config < temp.config_it
+    plugin.tx_indexedsearch._DEFAULT_PI_VARS.lang = {$site.languages.enabled.it}
+    plugin.tx_indexedsearch.settings.defaultOptions.languageUid = {$site.languages.enabled.it}
+[GLOBAL]
+#################################
+
+#################################
+## Set language based on host
+#[globalString = IENV:HTTP_HOST = *example.com]
+#    config < temp.config_de
+#    config.defaultGetVars.L = {$site.languages.enabled.de}
+#    plugin.tx_indexedsearch._DEFAULT_PI_VARS.lang = {$site.languages.enabled.de}
+#    plugin.tx_indexedsearch.settings.defaultOptions.languageUid = {$site.languages.enabled.de}
+#[GLOBAL]
+#################################
+
+#################################
+## Set language based on parameter
+[globalVar = GP:L >= 0] && [globalVar = GP:L = {$site.languages.enabled.fr}]
+    config < temp.config_fr
+    plugin.tx_indexedsearch._DEFAULT_PI_VARS.lang = {$site.languages.enabled.fr}
+    plugin.tx_indexedsearch.settings.defaultOptions.languageUid = {$site.languages.enabled.fr}
+[GLOBAL]
+[globalVar = GP:L >= 0] && [globalVar = GP:L = {$site.languages.enabled.de}]
+    config < temp.config_de
+    plugin.tx_indexedsearch._DEFAULT_PI_VARS.lang = {$site.languages.enabled.de}
+    plugin.tx_indexedsearch.settings.defaultOptions.languageUid = {$site.languages.enabled.de}
+[GLOBAL]
+[globalVar = GP:L >= 0] && [globalVar = GP:L = {$site.languages.enabled.en}]
+    config < temp.config_en
+    plugin.tx_indexedsearch._DEFAULT_PI_VARS.lang = {$site.languages.enabled.en}
+    plugin.tx_indexedsearch.settings.defaultOptions.languageUid = {$site.languages.enabled.en}
+[GLOBAL]
+[globalVar = GP:L >= 0] && [globalVar = GP:L = {$site.languages.enabled.it}]
+    config < temp.config_it
+    plugin.tx_indexedsearch._DEFAULT_PI_VARS.lang = {$site.languages.enabled.it}
+    plugin.tx_indexedsearch.settings.defaultOptions.languageUid = {$site.languages.enabled.it}
+[GLOBAL]
+#################################

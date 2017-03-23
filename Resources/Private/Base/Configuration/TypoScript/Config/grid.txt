@@ -1,0 +1,20 @@
+##########################################################
+## Copyright notice
+## (c) {|EXTENSION_GENERATE_YEAR|} {|EXTENSION_AUTHOR_NAME|}
+##########################################################
+
+#################################
+## Gridelement: 2 Columns definitions (50-50)
+tt_content.gridelements_pi1.20.10.setup{
+#    1 < lib.gridelements.defaultGridSetup
+#    1{
+#        wrap = <div class="cols">|<div class="clearfix"></div></div>
+#        columns {
+#            101 < .default
+#            101.wrap = <div class="col col-50 col-f">|</div>
+#            102 < .default
+#            102.wrap = <div class="col col-50 col-l">|</div>
+#        }
+#    }
+}
+#################################

@@ -1,0 +1,23 @@
+@import '../constants';
+@import '../Helpers/functions';
+@import '../Helpers/mixins';
+@import '../Helpers/media-queries';
+
+
+@mixin main-desktop {
+  #main {
+    @content;
+  }
+}
+
+@mixin main-tablet {
+  #main {
+    @content;
+  }
+}
+
+@mixin main-smartphone {
+  #main {
+    @content;
+  }
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-06-02T11:48:25Z" product-name="realurl">
+		<header/>
+		<body>
+			<trans-unit id="tt_content.tx_template_excluded_for" xml:space="preserve">
+				<source>Hide this content in selected view</source>
+			</trans-unit>
+			<trans-unit id="tt_content.tx_template_excluded_for.desktop" xml:space="preserve">
+				<source>Desktop</source>
+			</trans-unit>
+			<trans-unit id="tt_content.tx_template_excluded_for.desktop.description" xml:space="preserve">
+				<source>Hide this content for desktop size defined in media queries</source>
+			</trans-unit>
+			<trans-unit id="tt_content.tx_template_excluded_for.tablet" xml:space="preserve">
+				<source>Tablet</source>
+			</trans-unit>
+			<trans-unit id="tt_content.tx_template_excluded_for.tablet.description" xml:space="preserve">
+				<source>Hide this content for tablet size defined in media queries</source>
+			</trans-unit>
+			<trans-unit id="tt_content.tx_template_excluded_for.smartphone" xml:space="preserve">
+				<source>Smartphone</source>
+			</trans-unit>
+			<trans-unit id="tt_content.tx_template_excluded_for.tablet.description" xml:space="preserve">
+				<source>Hide this content for smartphone size defined in media queries</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

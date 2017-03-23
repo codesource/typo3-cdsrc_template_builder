@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+	<file t3:id="1415814891" source-language="en" datatype="plaintext" original="messages" date="2012-08-31T17:54:12Z" product-name="lang">
+		<header/>
+		<body>
+			<trans-unit id="action.new">
+				<source>Create a new template</source>
+			</trans-unit>
+			<trans-unit id="action.cancel">
+				<source>Cancel</source>
+			</trans-unit>
+			<trans-unit id="action.create">
+				<source>Create</source>
+			</trans-unit>
+			<trans-unit id="action.validate">
+				<source>Validate</source>
+			</trans-unit>
+
+			<trans-unit id="header.index.title">
+				<source>Template creation</source>
+			</trans-unit>
+			<trans-unit id="header.index.bodytext">
+				<source>Create a new "template" extension and customize as your wishes.</source>
+			</trans-unit>
+
+			<trans-unit id="fieldset.general">
+				<source>General informations</source>
+			</trans-unit>
+			<trans-unit id="fieldset.general.description">
+				<source>Extension's general informations</source>
+			</trans-unit>
+
+			<trans-unit id="fieldset.author">
+				<source>Author information</source>
+			</trans-unit>
+			<trans-unit id="fieldset.author.description">
+				<source>Set extension author's information</source>
+			</trans-unit>
+
+			<trans-unit id="fieldset.dependencies">
+				<source>Extension dependencies</source>
+			</trans-unit>
+			<trans-unit id="fieldset.dependencies.description">
+				<source>Choose and add extension dependencies</source>
+			</trans-unit>
+
+			<trans-unit id="template.field.key">
+				<source>Extension's key</source>
+			</trans-unit>
+			<trans-unit id="template.description.key">
+				<source>The given extension key will be prefixed by "template_"</source>
+			</trans-unit>
+			<trans-unit id="template.field.name">
+				<source>Extension's name</source>
+			</trans-unit>
+			<trans-unit id="template.description.name">
+				<source>This is used in extension manager.</source>
+			</trans-unit>
+			<trans-unit id="template.field.description">
+				<source>Extension's description</source>
+			</trans-unit>
+			<trans-unit id="template.description.description">
+				<source>A short description used in extension manager.</source>
+			</trans-unit>
+			<trans-unit id="template.field.authorName">
+				<source>Author's name</source>
+			</trans-unit>
+			<trans-unit id="template.description.authorName">
+				<source>Name of this extension's author</source>
+			</trans-unit>
+			<trans-unit id="template.field.authorEmail">
+				<source>Author's email</source>
+			</trans-unit>
+			<trans-unit id="template.description.authorEmail">
+				<source>Email of this extension's author</source>
+			</trans-unit>
+			<trans-unit id="template.field.authorCompany">
+				<source>Author's company</source>
+			</trans-unit>
+			<trans-unit id="template.description.authorCompany">
+				<source>Company of this extension's author</source>
+			</trans-unit>
+			<trans-unit id="template.field.authorCompanyWebsite">
+				<source>Author's company website</source>
+			</trans-unit>
+			<trans-unit id="template.description.authorCompanyWebsite">
+				<source>Website of the company of this extension's author</source>
+			</trans-unit>
+
+			<trans-unit id="template.dependencies.realurl.useExtendedConfigurationFile">
+				<source>Use extended default configuration file?</source>
+			</trans-unit>
+			<trans-unit id="template.dependencies.realurl.useExtendedConfigurationFile.description">
+				<source>This configuration use dynamic features to define domain, language, ... things.</source>
+			</trans-unit>
+
+			<trans-unit id="format.required">
+				<source>(required)</source>
+			</trans-unit>
+			<trans-unit id="format.optional">
+				<source>(optional)</source>
+			</trans-unit>
+
+			<trans-unit id="label.enable">
+				<source>Enable</source>
+			</trans-unit>
+			<trans-unit id="label.disable">
+				<source>Disable</source>
+			</trans-unit>
+			<trans-unit id="label.yes">
+				<source>Yes</source>
+			</trans-unit>
+            <trans-unit id="label.no">
+                <source>No</source>
+            </trans-unit>
+
+            <trans-unit id="error.template.key.exists">
+                <source>Given key "%s" already exists.</source>
+            </trans-unit>
+		</body>
+	</file>
+</xliff>

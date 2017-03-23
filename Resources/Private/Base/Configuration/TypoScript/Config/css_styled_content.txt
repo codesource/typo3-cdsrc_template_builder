@@ -1,0 +1,37 @@
+##########################################################
+## Copyright notice
+## (c) {|EXTENSION_GENERATE_YEAR|} {|EXTENSION_AUTHOR_NAME|}
+##########################################################
+
+#################################
+## Set wrapping element for RTE contents
+tt_content.text.20.wrap = <div class="rte">|</div>
+lib.parseFunc_RTE.table.stdWrap.HTMLparser.tags.table.fixAttrib.class >
+lib.parseFunc_RTE.externalBlocks.table.stdWrap.HTMLparser.tags.table.fixAttrib.class >
+#################################
+
+#################################
+## Replace "rel" attribute by "data-rel" on images
+tt_content.image.20.1.imageLinkWrap.linkParams.ATagParams.dataWrap =  class="{$styles.content.imgtext.linkWrap.lightboxCssClass}" data-rel="{$styles.content.imgtext.linkWrap.lightboxRelAttribute}"
+#################################
+
+#################################
+## Replace some fluid content
+lib.fluidContent {
+    templateRootPaths >
+    templateRootPaths {
+        10 = {$site.theme.templates}Fluid/
+		0 = EXT:fluid_styled_content/Resources/Private/Templates/
+    }
+    partialRootPaths >
+    partialRootPaths {
+        10 = {$site.theme.partials}Fluid/
+		0 = EXT:fluid_styled_content/Resources/Private/Partials/
+    }
+    layoutRootPaths >
+    layoutRootPaths {
+        10 = {$site.theme.layouts}Fluid/
+		0 = EXT:fluid_styled_content/Resources/Private/Layouts/
+    }
+}
+#################################

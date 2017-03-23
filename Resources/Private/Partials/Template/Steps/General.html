@@ -1,0 +1,64 @@
+{namespace c=CDSRC\CdsrcTemplateBuilder\ViewHelpers}
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <f:translate key="fieldset.general.description"/>
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div class="form-group row {c:form.ifError(property:'template.name', then:'has-error')}">
+            <div class="col-xs-3">
+                <label for="template_name" class="control-label">
+                    <f:translate key="template.field.name"/>
+                    <span class="format"><f:translate key="format.required"/></span>
+                </label>
+                <span class="help-block"><f:translate key="template.description.name"/></span>
+            </div>
+            <div class="col-xs-6">
+                <f:form.textfield property="name" class="form-control" id="template_name" />
+            </div>
+            <div class="col-xs-3">
+                <span class="help-block">
+                    <strong><c:form.errorMessage property="template.name" /></strong>
+                </span>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group row {c:form.ifError(property:'template.key', then:'has-error')}">
+            <div class="col-xs-3">
+                <label for="template_key" class="control-label">
+                    <f:translate key="template.field.key"/>
+                    <span class="format"><f:translate key="format.required"/></span>
+                </label>
+                <span class="help-block"><f:translate key="template.description.key"/></span>
+            </div>
+            <div class="col-xs-6">
+                <f:form.textfield property="key" class="form-control" id="template_key"/>
+            </div>
+            <div class="col-xs-3">
+                <span class="help-block">
+                    <strong><c:form.errorMessage property="template.key" /></strong>
+                </span>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group row {c:form.ifError(property:'template.description', then:'has-error')}">
+            <div class="col-xs-3">
+                <label for="template_description">
+                    <f:translate key="template.field.description"/>
+                    <span class="format"><f:translate key="format.optional"/></span>
+                </label>
+                <span class="help-block"><f:translate key="template.description.description"/></span>
+            </div>
+            <div class="col-xs-6">
+                <f:form.textfield property="description" class="form-control" id="template_description"/>
+            </div>
+            <div class="col-xs-3">
+                <span class="help-block">
+                    <strong><c:form.errorMessage property="template.description" /></strong>
+                </span>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

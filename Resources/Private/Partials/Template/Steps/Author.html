@@ -1,0 +1,78 @@
+{namespace c=CDSRC\CdsrcTemplateBuilder\ViewHelpers}
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <f:translate key="fieldset.author.description"/>
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div class="form-group row {c:form.ifError(property:'template.authorName', then:'has-error')}">
+            <div class="col-xs-3">
+                <label for="template_authorName" class="control-label">
+                    <f:translate key="template.field.authorName"/>
+                    <span class="format"><f:translate key="format.required"/></span>
+                </label>
+                <span class="help-block"><f:translate key="template.description.authorName"/></span>
+            </div>
+            <div class="col-xs-6">
+                <f:form.textfield property="authorName" class="form-control" id="template_authorName"/>
+            </div>
+            <div class="col-xs-3">
+                <span class="help-block">
+                    <strong><c:form.errorMessage property="template.authorName" /></strong>
+                </span>
+            </div>
+        </div>
+        <div class="form-group row {c:form.ifError(property:'template.authorEmail', then:'has-error')}">
+            <div class="col-xs-3">
+                <label for="template_authorEmail" class="control-label">
+                    <f:translate key="template.field.authorEmail"/>
+                    <span class="format"><f:translate key="format.optional"/></span>
+                </label>
+                <span class="help-block"><f:translate key="template.description.authorEmail"/></span>
+            </div>
+            <div class="col-xs-6">
+                <f:form.textfield property="authorEmail" type="email" class="form-control" id="template_authorEmail"/>
+            </div>
+            <div class="col-xs-3">
+                <span class="help-block">
+                    <strong><c:form.errorMessage property="template.authorEmail" /></strong>
+                </span>
+            </div>
+        </div>
+        <div class="form-group row {c:form.ifError(property:'template.authorCompany', then:'has-error')}">
+            <div class="col-xs-3">
+                <label for="template_authorCompany" class="control-label">
+                    <f:translate key="template.field.authorCompany"/>
+                    <span class="format"><f:translate key="format.optional"/></span>
+                </label>
+                <span class="help-block"><f:translate key="template.description.authorCompany"/></span>
+            </div>
+            <div class="col-xs-6">
+                <f:form.textfield property="authorCompany" class="form-control" id="template_authorCompany"/>
+            </div>
+            <div class="col-xs-3">
+                <span class="help-block">
+                    <strong><c:form.errorMessage property="template.authorCompany" /></strong>
+                </span>
+            </div>
+        </div>
+        <div class="form-group row {c:form.ifError(property:'template.authorCompanyWebsite', then:'has-error')}">
+            <div class="col-xs-3">
+                <label for="template_authorCompanyWebsite" class="control-label">
+                    <f:translate key="template.field.authorCompanyWebsite"/>
+                    <span class="format"><f:translate key="format.optional"/></span>
+                </label>
+                <span class="help-block"><f:translate key="template.description.authorCompanyWebsite"/></span>
+            </div>
+            <div class="col-xs-6">
+                <f:form.textfield property="authorCompanyWebsite" class="form-control" id="template_authorCompanyWebsite"/>
+            </div>
+            <div class="col-xs-3">
+                <span class="help-block">
+                    <strong><c:form.errorMessage property="template.authorCompanyWebsite" /></strong>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

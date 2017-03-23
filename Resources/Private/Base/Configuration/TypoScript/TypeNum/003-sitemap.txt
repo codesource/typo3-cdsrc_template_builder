@@ -1,0 +1,199 @@
+##########################################################
+## Copyright notice
+## (c) 2016 Matthias Toscanelli
+##########################################################
+
+#################################
+## Sitemap definition
+sitemap = PAGE
+sitemap{
+    typeNum = 3
+    config{
+        no_cache = 1
+        disableAllHeaderCode = 1
+        additionalHeaders{
+            10.header = Content-Type: application/xml; charset=utf-8
+        }
+        simulateStaticDocuments = 0
+        tx_realurl_enable = 1
+        admPanel = 0
+        xhtml_cleaning = 0
+        sys_language_uid = 0
+    }
+    10 = COA
+    10{
+        wrap = <?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">|</urlset>
+        10 = HMENU
+        10{
+            1 = TMENU
+            1{
+                expAll = 1
+                NO = 1
+                NO{
+                    doNotLinkIt = 1
+                    allWrap = <url>|</url>
+                    stdWrap.cObject = COA
+                    stdWrap.cObject{
+                        10 = TEXT
+                        10{
+                            wrap = <loc>|</loc>
+                            typolink.parameter.field = uid
+                            typolink.returnLast = url
+                            typolink.forceAbsoluteUrl = 1
+                        }
+                        20 = COA
+                        20{
+                            10 = TEXT
+                            10{
+                                stdWrap{
+                                    wrap = <xhtml:link rel="alternative" href="|" ></xhtml:link>
+                                    typolink{
+                                        parameter.field = uid
+                                        returnLast = url
+                                        forceAbsoluteUrl = 1
+                                        additionalParams = &L={$site.languages.enabled.fr}
+                                    }
+                                }
+                                addParams.hreflang = fr
+                                if{
+                                    value = {$site.languages.enabled.fr}
+                                    isLessThan = -1
+                                }
+                            }
+                            20 < .10
+                            20{
+                                stdWrap.typolink.additionalParams = &L={$site.languages.enabled.de}
+                                addParams.hreflang = de
+                                if.value = {$site.languages.enabled.de}
+                            }
+                            30 < .10
+                            30{
+                                stdWrap.typolink.additionalParams = &L={$site.languages.enabled.en}
+                                addParams.hreflang = en
+                                if.value = {$site.languages.enabled.en}
+                            }
+                            40 < .10
+                            40{
+                                stdWrap.typolink.additionalParams = &L={$site.languages.enabled.it}
+                                addParams.hreflang = it
+                                if.value = {$site.languages.enabled.it}
+                            }
+                        }
+                        30 = TEXT
+                        30{
+                            wrap = <lastmod>|</lastmod>
+                            setCurrent.field = tstamp
+                            cObject = CONTENT
+                            cObject{
+                                table = tt_content
+                                select{
+                                    pidInList.field = uid
+                                    max = 1
+                                    languageField = sys_language_uid
+                                    orderBy = tstamp DESC
+                                }
+                                renderObj = TEXT
+                                renderObj{
+                                    field = tstamp
+                                    if{
+                                        value.current = 1
+                                        isGreaterThan.field = tstamp
+                                    }
+                                }
+                            }
+                            ifEmpty{
+                                field = tstamp
+                            }
+                            date = Y-m-d
+                        }
+                        40 = TEXT
+                        40{
+                            wrap = <changefreq>|</changefreq>
+                            cObject = CASE
+                            cObject{
+                                key = 1
+                                key.if.isTrue.field = no_cache
+                                default = COA
+                                default{
+                                    1 = TEXT
+                                    1.value = always
+                                    1.if.value = {$site.sitemap.changefreq.always}
+                                    1.if.isInList.field = uid
+                                    2 < .1
+                                    2.value = hourly
+                                    2.if.value = {$site.sitemap.changefreq.hourly}
+                                    3 < .1
+                                    3.value = daily
+                                    3.if.value = {$site.sitemap.changefreq.daily}
+                                    4 < .1
+                                    4.value = weekly
+                                    4.if.value = {$site.sitemap.changefreq.weekly}
+                                    5 < .1
+                                    5.value = monthly
+                                    5.if.value = {$site.sitemap.changefreq.monthly}
+                                    6 < .1
+                                    6.value = yearly
+                                    6.if.value = {$site.sitemap.changefreq.yearly}
+                                    7 < .1
+                                    7.value = never
+                                    7.if.value = {$site.sitemap.changefreq.never}
+                                }
+                                1 = TEXT
+                                1.value = always
+                            }
+                            ifBlank = {$site.sitemap.changefreq.default}
+                        }
+                        15 = TEXT
+                        15{
+                            wrap = <priority>|</priority>
+                            cObject = COA
+                            cObject{
+                                1 = TEXT
+                                1.value = 0.1
+                                1.if.value = {$site.sitemap.priority.1}
+                                1.if.isInList.field = uid
+                                2 < .1
+                                2.value = 0.2
+                                2.if.value = {$site.sitemap.priority.2}
+                                3 < .1
+                                3.value = 0.3
+                                3.if.value = {$site.sitemap.priority.3}
+                                4 < .1
+                                4.value = 0.4
+                                4.if.value = {$site.sitemap.priority.4}
+                                5 < .1
+                                5.value = 0.5
+                                5.if.value = {$site.sitemap.priority.5}
+                                6 < .1
+                                6.value = 0.6
+                                6.if.value = {$site.sitemap.priority.6}
+                                7 < .1
+                                7.value = 0.7
+                                7.if.value = {$site.sitemap.priority.7}
+                                8 < .1
+                                8.value = 0.8
+                                8.if.value = {$site.sitemap.priority.8}
+                                9 < .1
+                                9.value = 0.9
+                                9.if.value = {$site.sitemap.priority.9}
+                                10 < .1
+                                10.value = 1.0
+                                10.if.value = {$site.sitemap.priority.10}
+                            }
+                            ifBlank = {$site.sitemap.priority.default}
+                        }
+                    }
+                }
+            }
+            2 < .1
+            3 < .1
+            4 < .1
+            5 < .1
+            6 < .1
+            7 < .1
+            8 < .1
+            9 < .1
+        }
+    }
+}
+#################################

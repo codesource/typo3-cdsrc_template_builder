@@ -1,0 +1,112 @@
+/****************************************************************************
+    *** GLOBALS CSS FILE
+    ***
+    *** Author: Matthias Toscanelli
+    *** Copyright: Code-Source
+    ***
+*****************************************************************************/
+
+@import "Helpers/reset";
+
+@import "General/base";
+@import "Partials/header";
+@import "Partials/main";
+@import "Partials/footer";
+@import "Partials/extensions";
+
+
+#page {
+  margin: auto;
+  max-width: 1200px;
+  @include screen-desktop {
+    @include header-desktop;
+    @include main-desktop {
+      //@include ext-...-desktop;
+    }
+    @include footer-desktop;
+    [data-media*="h-desktop"],
+    .h-desktop,
+    .s-tablet,
+    .s-smartphone {
+      display: none !important;
+    }
+  }
+  @include screen-tablet {
+    @include header-tablet;
+    @include main-tablet {
+      //@include ext-...-tablet;
+    }
+    @include footer-tablet;
+    [data-media*="h-tablet"],
+    .h-tablet,
+    .s-desktop,
+    .s-smartphone {
+      display: none !important;
+    }
+  }
+  @include screen-smartphone {
+    @include header-smartphone;
+    @include main-smartphone {
+      //@include ext-...-smartphone;
+    }
+    @include footer-smartphone;
+    [data-media*="h-smartphone"],
+    .h-smartphone,
+    .s-desktop,
+    .s-tablet {
+      display: none !important;
+    }
+  }
+}
+
+/******************************
+ * Example
+ * TODO: To remove
+ *****************************/
+html{
+  height: 100%;
+  width: 100%;
+}
+body{
+  background: #eaeaea;
+  font-size: 16px;
+  height: 100%;
+  width: 100%;
+}
+#page{
+  box-shadow: 12px 0 15px -4px rgba(100, 100, 100, 0.1), -12px 0 8px -4px rgba(100, 100, 100, 0.1);
+  height: 100%;
+  margin: auto;
+  padding-bottom: 50px;
+  position: relative;
+  width: 1280px;
+  #header{
+    background: #cacaca;
+    height: 180px;
+    #logo{
+      padding: 20px;
+    }
+    #menu{
+      padding: 20px;
+      ul{
+        li{
+          display: inline-block;
+        }
+      }
+    }
+  }
+  #main{
+    padding: 20px;
+  }
+  #footer{
+    background: #dadada;
+    bottom: 0;
+    height: 50px;
+    position: absolute;
+    width: 100%;
+    #copyright{
+      padding: 15px 20px;
+    }
+  }
+}
+

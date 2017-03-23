@@ -1,0 +1,82 @@
+{namespace c=CDSRC\CdsrcTemplateBuilder\ViewHelpers}
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <f:translate key="fieldset.dependencies.description"/>
+        </h3>
+    </div>
+    <div class="panel-body">
+        <f:for each="{dependencies}" as="extension">
+            <div class="form-group row">
+                <div class="col-xs-7">
+                    <label class="control-label">
+                        {extension.title}
+                    </label>
+                    <span class="help-block">
+                        {extension.description}
+                    </span>
+                </div>
+                <div class="col-xs-3">
+                    <f:form.checkbox
+                            name="dependencies[{extension.extensionKey}][enable]"
+                            value="1"
+                            checked="true"
+                            data="{
+                                toggle:'toggle',
+                                size:'default',
+                                width:'100',
+                                onstyle:'success',
+                                offstyle:'danger',
+                                on:'{f:translate(id:\'label.enable\')}',
+                                off:'{f:translate(id:\'label.disable\')}'
+                            }"
+                    />
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <f:render section="{extension.extensionKey}" optional="true" arguments="{_all}"/>
+        </f:for>
+    </div>
+</div>
+
+<f:section name="realurl">
+    <div class="panel-group" role="tablist">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="collapseConfiguration-{extension.extensionKey}-header">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" href="#collapseConfiguration-{extension.extensionKey}-content" aria-expanded="false" aria-controls="collapseConfiguration-{extension.extensionKey}-content">
+                        Configuration
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseConfiguration-{extension.extensionKey}-content" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseConfiguration-{extension.extensionKey}-header">
+                <div class="panel-body">
+                    <div class="form-group row">
+                        <div class="col-xs-4">
+                            <label>
+                                <f:translate key="template.dependencies.realurl.useExtendedConfigurationFile"/>
+                            </label>
+                            <span class="help-block"><f:translate key="template.dependencies.realurl.useExtendedConfigurationFile"/></span>
+                        </div>
+                        <div class="col-xs-6">
+                            <f:form.checkbox
+                                    name="dependencies[{extension.extensionKey}][useExtendedConfigurationFile]"
+                                    value="1"
+                                    checked="true"
+                                    data="{
+                                        toggle:'toggle',
+                                        size:'default',
+                                        width:'100',
+                                        onstyle:'success',
+                                        offstyle:'danger',
+                                        on:'{f:translate(id:\'label.yes\')}',
+                                        off:'{f:translate(id:\'label.no\')}'
+                                    }"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</f:section>

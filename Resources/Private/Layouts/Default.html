@@ -1,0 +1,36 @@
+<f:be.container
+	enableClickMenu="0"
+	loadExtJs="0"
+	loadJQuery="true"
+	includeCssFiles="{
+		0: '../typo3conf/ext/cdsrc_template_builder/Resources/Public/Libraries/BootstrapToggle/css/bootstrap-toggle.min.css',
+		1: '../typo3conf/ext/cdsrc_template_builder/Resources/Public/Css/bootstrap-toggle-fixes.css'
+	}"
+	includeJsFiles="{
+		0: '../typo3conf/ext/cdsrc_template_builder/Resources/Public/Libraries/BootstrapToggle/js/bootstrap-toggle.min.js'
+	}"
+	addJsInlineLabels="{
+		0: 'flashmessage.error',
+		1: 'flashmessage.information',
+		2: 'flashmessage.success',
+		3: 'flashmessage.templateCreated'
+	}"
+>
+	<div
+		class="typo3-fullDoc typo3-module-cdsrctemplatebuilder"
+		data-create-template-uri="{f:uri.action(action:'getTranslations',format:'json')}"
+		data-prefix="tx_cdsrctemplatebuilder_creation"
+	>
+		<div id="typo3-docheader">
+			<div class="typo3-docheader-buttons">
+				<f:render section="iconButtons" />
+			</div>
+		</div>
+		<div id="typo3-docbody">
+			<div id="typo3-inner-docbody">
+				<f:render section="content" />
+				<f:render partial="Icons" />
+			</div>
+		</div>
+	</div>
+</f:be.container>

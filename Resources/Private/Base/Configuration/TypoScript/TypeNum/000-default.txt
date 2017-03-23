@@ -1,0 +1,36 @@
+##########################################################
+## Copyright notice
+## (c) {|EXTENSION_GENERATE_YEAR|} {|EXTENSION_AUTHOR_NAME|}
+##########################################################
+
+#################################
+## Main page definition
+page = PAGE
+page.typeNum = 0
+page.10 = CASE
+page.10 {
+    key.data = levelfield:-1,backend_layout_next_level,slide
+    key.override.field = backend_layout
+    default = FLUIDTEMPLATE
+    default{
+        format = html
+        templateName = Default
+        partialRootPaths{
+            10 = {$site.theme.partials}
+        }
+        layoutRootPaths{
+            10 = {$site.theme.layouts}
+        }
+        templateRootPaths{
+            10 = {$site.theme.templates}
+        }
+        variables{
+            content = CONTENT
+            content{
+                table = tt_content
+                select.where = colPos = 0
+            }
+        }
+    }
+}
+#################################
