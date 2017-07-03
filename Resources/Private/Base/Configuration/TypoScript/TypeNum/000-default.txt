@@ -28,7 +28,10 @@ page.10 {
             content = CONTENT
             content{
                 table = tt_content
-                select.where = colPos = 0
+                select{
+                    where = colPos = 0
+                    orderBy = sorting
+                }
             }
         }
     }
