@@ -6,7 +6,7 @@
 #################################
 ## Header Logo
 lib.header.logo = IMAGE
-lib.header.logo.file = EXT:backend/Resources/Public/Images/typo3-transparent@2x.png
+lib.header.logo.file = EXT:{|EXTENSION_KEY|}/Resources/Public/Images/typo3-transparent@2x.png
 #################################
 
 #################################
