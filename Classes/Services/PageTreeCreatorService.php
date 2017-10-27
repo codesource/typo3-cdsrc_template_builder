@@ -203,7 +203,7 @@ class PageTreeCreatorService extends AbstractTemplateService
                     'cruser_id' => $this->beUser->user['uid'],
                     'title' => 'Default template',
                     'root' => 1,
-                    'include_static_file' => 'EXT:css_styled_content/static/,EXT:fluid_styled_content/Configuration/TypoScript/Static/,EXT:form/Configuration/TypoScript/,EXT:'.$this->template->getKey().'/Configuration/TypoScript'
+                    'include_static_file' => 'EXT:fluid_styled_content/Configuration/TypoScript/,EXT:fluid_styled_content/Configuration/TypoScript/Styling/,EXT:form/Configuration/TypoScript/,EXT:'.$this->template->getKey().'/Configuration/TypoScript'
                 )
             ),
             'backend_layout' => array(
