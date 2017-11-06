@@ -44,7 +44,10 @@ site{
         key =
     }
     gwmt{
-        key =
+        key{
+            0 =
+            1 =
+        }
     }
     bwmt{
         key =

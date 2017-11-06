@@ -573,7 +573,29 @@ page.5{
 
 #################################
 ## Google web master tools
-page.meta.google-site-verification = {$site.gwmt.key}
+page.headerData{
+    1485520899 = COA
+    1485520899{
+        10 = TEXT
+        10{
+            noTrimWrap(
+|
+<meta name="google-site-verification" content="|" />|
+)
+            value =  {$site.gwmt.key.0}
+            required = 1
+        }
+        20 = TEXT
+        20{
+            noTrimWrap(
+|
+<meta name="google-site-verification" content="|" />|
+)
+            value =  {$site.gwmt.key.1}
+            required = 1
+        }
+    }
+}
 #################################
 
 #################################
