@@ -122,7 +122,7 @@ site{
         partials = EXT:{|EXTENSION_KEY|}/Resources/Private/Partials/
         templates = EXT:{|EXTENSION_KEY|}/Resources/Private/Templates/
     }
-    viewport = width=device-width, maximum-scale=1;
+    viewport = width=device-width, maximum-scale=1
 }
 
 plugin.tx_jmrecaptcha{
