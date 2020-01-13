@@ -26,6 +26,8 @@ namespace CDSRC\CdsrcTemplateBuilder\Exceptions;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ******************************************************************** */
 
-class ExtensionCreationException extends \Exception
+use Exception;
+
+class ExtensionCreationException extends Exception
 {
 }

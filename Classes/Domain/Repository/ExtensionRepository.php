@@ -4,7 +4,9 @@ namespace CDSRC\CdsrcTemplateBuilder\Domain\Repository;
 
 
 use TYPO3\CMS\Core\Utility\ClassNamingUtility;
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbQueryParser;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use \TYPO3\CMS\Extensionmanager\Domain\Repository\ExtensionRepository as BaseExtensionRepository;
 
@@ -18,7 +20,8 @@ class ExtensionRepository extends BaseExtensionRepository
     /**
      * @param array $extensionKeys
      *
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @return array|QueryResultInterface
+     * @throws InvalidQueryException
      */
     public function findByCurrentVersionByExtensionKey($extensionKeys)
     {

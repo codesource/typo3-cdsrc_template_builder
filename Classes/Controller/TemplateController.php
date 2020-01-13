@@ -23,17 +23,23 @@ namespace CDSRC\CdsrcTemplateBuilder\Controller;
 
 
 use CDSRC\CdsrcTemplateBuilder\Domain\Model\Template;
+use CDSRC\CdsrcTemplateBuilder\Domain\Repository\ExtensionRepository;
 use CDSRC\CdsrcTemplateBuilder\Exceptions\ExtensionInstallationException;
 use CDSRC\CdsrcTemplateBuilder\Services\ExtensionCreatorService;
 use CDSRC\CdsrcTemplateBuilder\Services\PageTreeCreatorService;
+use Exception;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Database\Query\QueryHelper;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbQueryParser;
 use TYPO3\CMS\Extensionmanager\Domain\Model\Extension;
+use TYPO3\CMS\Extensionmanager\Service\ExtensionManagementService;
+use TYPO3\CMS\Extensionmanager\Utility\ExtensionModelUtility;
+use TYPO3\CMS\Extensionmanager\Utility\InstallUtility;
 
 class TemplateController extends ActionController
 {
@@ -45,50 +51,50 @@ class TemplateController extends ActionController
     );
 
     /**
-     * @var \TYPO3\CMS\Extensionmanager\Utility\InstallUtility
+     * @var InstallUtility
      */
     protected $installUtility;
 
     /**
-     * @var \TYPO3\CMS\Extensionmanager\Utility\ExtensionModelUtility
+     * @var ExtensionModelUtility
      */
     protected $extensionModelUtility;
 
     /**
-     * @var \TYPO3\CMS\Extensionmanager\Service\ExtensionManagementService
+     * @var ExtensionManagementService
      */
     protected $managementService;
 
     /**
-     * @var \CDSRC\CdsrcTemplateBuilder\Domain\Repository\ExtensionRepository
+     * @var ExtensionRepository
      */
     protected $extensionRepository;
 
     /**
-     * @param \TYPO3\CMS\Extensionmanager\Utility\InstallUtility $installUtility
+     * @param InstallUtility $installUtility
      */
-    public function injectInstallUtility(\TYPO3\CMS\Extensionmanager\Utility\InstallUtility $installUtility) {
+    public function injectInstallUtility(InstallUtility $installUtility) {
         $this->installUtility = $installUtility;
     }
 
     /**
-     * @param \TYPO3\CMS\Extensionmanager\Utility\ExtensionModelUtility $extensionModelUtility
+     * @param ExtensionModelUtility $extensionModelUtility
      */
-    public function injectExtensionModelUtility(\TYPO3\CMS\Extensionmanager\Utility\ExtensionModelUtility $extensionModelUtility) {
+    public function injectExtensionModelUtility(ExtensionModelUtility $extensionModelUtility) {
         $this->extensionModelUtility = $extensionModelUtility;
     }
 
     /**
-     * @param \TYPO3\CMS\Extensionmanager\Service\ExtensionManagementService $managementService
+     * @param ExtensionManagementService $managementService
      */
-    public function injectManagementService(\TYPO3\CMS\Extensionmanager\Service\ExtensionManagementService $managementService) {
+    public function injectManagementService(ExtensionManagementService $managementService) {
         $this->managementService = $managementService;
     }
 
     /**
-     * @param \CDSRC\CdsrcTemplateBuilder\Domain\Repository\ExtensionRepository $extensionRepository
+     * @param ExtensionRepository $extensionRepository
      */
-    public function injectExtensionRepository(\CDSRC\CdsrcTemplateBuilder\Domain\Repository\ExtensionRepository $extensionRepository) {
+    public function injectExtensionRepository(ExtensionRepository $extensionRepository) {
         $this->extensionRepository = $extensionRepository;
     }
 
@@ -103,8 +109,6 @@ class TemplateController extends ActionController
 
     /**
      * Return default module view
-     *
-     * @return string
      */
     public function indexAction()
     {
@@ -113,8 +117,6 @@ class TemplateController extends ActionController
 
     /**
      * Return template creation form
-     *
-     * @return string
      */
     public function newAction()
     {
@@ -132,8 +134,6 @@ class TemplateController extends ActionController
 
     /**
      * Return a preview of current template before creation
-     *
-     * @return string
      */
     public function previewAction()
     {
@@ -146,7 +146,7 @@ class TemplateController extends ActionController
      * @param Template $template
      * @param array $dependencies
      *
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+     * @throws InvalidQueryException
      */
     public function createAction(Template $template, array $dependencies)
     {
@@ -190,7 +190,7 @@ class TemplateController extends ActionController
             }
 
             $this->redirect('index');
-        }catch(\Exception $e){
+        }catch(Exception $e){
             $this->view->assign('template', $template);
             $this->view->assign('error', $e->getMessage());
             $dependencies = $this->extensionRepository->findByCurrentVersionByExtensionKey($this->extensionDependencies);

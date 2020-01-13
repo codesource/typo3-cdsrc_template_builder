@@ -30,8 +30,13 @@ namespace CDSRC\CdsrcTemplateBuilder\Services;
 use CDSRC\CdsrcTemplateBuilder\Domain\Model\Template;
 use CDSRC\CdsrcTemplateBuilder\Exceptions\ExtensionCreationException;
 use CDSRC\CdsrcTemplateBuilder\Exceptions\ExtensionExistsException;
+use Exception;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extensionmanager\Domain\Model\Extension;
 
 /**
  * Class ExtensionCreatorService
@@ -85,15 +90,17 @@ class ExtensionCreatorService extends AbstractTemplateService
      * Create the new extension based on template object
      *
      * @throws ExtensionExistsException
+     * @throws ExtensionCreationException
      */
     public function execute()
     {
-        if (ExtensionManagementUtility::getExtensionKeyByPrefix($this->template->getKey()) !== false) {
+        if (ExtensionManagementUtility::isLoaded($this->template->getKey())) {
             throw new ExtensionExistsException('This extension key already exists.', 1445515206);
         }
 
         // Create root directory
-        $extensionRootPath = PATH_site . 'typo3conf/ext/' . $this->template->getKey();
+
+        $extensionRootPath = Environment::getExtensionsPath() . '/' . $this->template->getKey();
         if (is_dir($extensionRootPath)) {
             throw new ExtensionCreationException('Extension\'s root directory already exists.', 1445515207);
         }
@@ -104,7 +111,7 @@ class ExtensionCreatorService extends AbstractTemplateService
         // Copy base to directory
         try {
             $this->copyBaseDirectory($extensionRootPath);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->rollback($extensionRootPath);
             throw $e;
         }
@@ -118,7 +125,7 @@ class ExtensionCreatorService extends AbstractTemplateService
     protected function buildExtensionDependencies()
     {
         $dependencies = array();
-        /** @var \TYPO3\CMS\Extensionmanager\Domain\Model\Extension $dependency */
+        /** @var Extension $dependency */
         foreach ($this->template->getDependencies() as $dependency) {
             $dependencies[] = sprintf("   			'%s' => '%s',", $dependency->getExtensionKey(),
                 $dependency->getVersion() . '-');
@@ -137,9 +144,9 @@ class ExtensionCreatorService extends AbstractTemplateService
     protected function copyBaseDirectory($extensionRootPath)
     {
         $source = ExtensionManagementUtility::extPath('cdsrc_template_builder') . 'Resources/Private/Base';
-        $iterator = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($source, \RecursiveDirectoryIterator::SKIP_DOTS),
-            \RecursiveIteratorIterator::SELF_FIRST
+        $iterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::SELF_FIRST
         );
         foreach ($iterator as $item) {
             $target = $extensionRootPath . '/' . $iterator->getSubPathName();

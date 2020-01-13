@@ -22,6 +22,9 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
@@ -75,7 +78,7 @@ call_user_func(function () {
             } else {
                 $realUrlData['cacheContent'] = unserialize(file_get_contents($realUrlData['cacheFile']));
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
         }
         if (is_array($realUrlData['cacheContent']) &&
             is_array($realUrlData['cacheContent']['realurl']) &&
@@ -196,12 +199,12 @@ call_user_func(function () {
 
         // Store in cached file
         if ($realUrlData['cacheCompression']) {
-            \TYPO3\CMS\Core\Utility\GeneralUtility::writeFile($realUrlData['cacheFile'], gzcompress(serialize(array(
+            GeneralUtility::writeFile($realUrlData['cacheFile'], gzcompress(serialize(array(
                 'md5' => $realUrlData['md5'],
                 'realurl' => $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['realurl'],
             )), $realUrlData['cacheCompressionLevel']));
         } else {
-            \TYPO3\CMS\Core\Utility\GeneralUtility::writeFile($realUrlData['cacheFile'], serialize(array(
+            GeneralUtility::writeFile($realUrlData['cacheFile'], serialize(array(
                 'md5' => $realUrlData['md5'],
                 'realurl' => $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['realurl'],
             )));
@@ -250,5 +253,3 @@ call_user_func(function () {
         }
     }
 });
-
-?>

@@ -20,8 +20,9 @@ namespace CDSRC\CdsrcTemplateBuilder\ViewHelpers\Form;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ******************************************************************** */
 
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
+use Closure;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 
 /**
  * View helper which render content if form property has error
@@ -53,20 +54,23 @@ class IfErrorViewHelper extends AbstractConditionViewHelper {
      * for a detailed description of this method.
      *
      * @param array $arguments
-     * @param \Closure $renderChildrenClosure
+     * @param Closure $renderChildrenClosure
      * @param RenderingContextInterface $renderingContext
      * @return mixed
-     * @see \TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface
      */
-    static public function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext) {
+    static public function renderStatic(array $arguments, Closure $renderChildrenClosure, RenderingContextInterface $renderingContext) {
         self::setArgumentCondition($arguments, $renderingContext);
         return parent::renderStatic($arguments, $renderChildrenClosure, $renderingContext);
     }
 
 
+    /**
+     * @param $arguments
+     * @param RenderingContextInterface $renderingContext
+     */
     static protected function setArgumentCondition(&$arguments, RenderingContextInterface $renderingContext){
         if(!isset($arguments['property']) && !isset($arguments['properties'])){
-            return '';
+            return;
         }
         if(isset($arguments['property']) && trim($arguments['property']) !== ''){
             $arguments['properties'] = array($arguments['property']);

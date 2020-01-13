@@ -2,6 +2,9 @@
 /**
  * @copyright Copyright (c) 2016 Code-Source
  */
+
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 $ll = 'LLL:EXT:{|EXTENSION_KEY|}/Resources/Private/Language/locallang_db.xml:tt_content.tx_template_excluded_for';
 $gfx = 'EXT:{|EXTENSION_KEY|}/Resources/Public/Icons/';
 $tempColumn = [
@@ -24,5 +27,5 @@ $tempColumn = [
     ],
 ];
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_content', $tempColumn);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tt_content', 'tx_template_excluded_for', '', 'after:layout');
+ExtensionManagementUtility::addTCAcolumns('tt_content', $tempColumn);
+ExtensionManagementUtility::addToAllTCAtypes('tt_content', 'tx_template_excluded_for', '', 'after:layout');

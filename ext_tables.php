@@ -1,10 +1,12 @@
 <?php
 
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
 if (!defined('TYPO3_MODE'))
     die('Access denied.');
 
 if (TYPO3_MODE === 'BE') {
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+    ExtensionUtility::registerModule(
         'CDSRC.cdsrc_template_builder',
         'tools',
         'templatebuilder',

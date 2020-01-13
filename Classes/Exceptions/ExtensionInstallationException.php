@@ -5,7 +5,9 @@
 namespace CDSRC\CdsrcTemplateBuilder\Exceptions;
 
 
-class ExtensionInstallationException extends \Exception
+use Exception;
+
+class ExtensionInstallationException extends Exception
 {
 
 }

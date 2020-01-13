@@ -20,20 +20,23 @@ namespace CDSRC\CdsrcTemplateBuilder\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ******************************************************************** */
 
+use DateTime;
+use SplObjectStorage;
 use TYPO3\CMS\Extensionmanager\Domain\Model\Extension;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 
 class Template
 {
 
     /**
      * @var string
-     * @validate NotEmpty
+     * @Validate("NotEmpty")
      */
     protected $key;
 
     /**
      * @var string
-     * @validate NotEmpty
+     * @Validate("NotEmpty")
      */
     protected $name;
 
@@ -44,20 +47,20 @@ class Template
 
     /**
      * @var string
-     * @validate NotEmpty
-     * @validate StringLength(maximum=50)
+     * @Validate("NotEmpty")
+     * @Validate("StringLength", options={"maximum":50})
      */
     protected $authorName;
 
     /**
      * @var string
-     * @validate EmailAddress
+     * @Validate("EmailAddress")
      */
     protected $authorEmail;
 
     /**
      * @var string
-     * @validate StringLength(maximum=50)
+     * @Validate("StringLength", options={"maximum":50})
      */
     protected $authorCompany;
 
@@ -67,12 +70,12 @@ class Template
     protected $authorCompanyWebsite;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     protected $createdAt;
 
     /**
-     * @var \SplObjectStorage
+     * @var SplObjectStorage
      */
     protected $dependencies;
 
@@ -86,8 +89,8 @@ class Template
      */
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
-        $this->dependencies = new \SplObjectStorage();
+        $this->createdAt = new DateTime();
+        $this->dependencies = new SplObjectStorage();
     }
 
     /**
@@ -220,7 +223,7 @@ class Template
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getCreatedAt()
     {
@@ -252,10 +255,19 @@ class Template
     }
 
     /**
-     * @return \SplObjectStorage
+     * @return SplObjectStorage
      */
     public function getDependencies(){
         return $this->dependencies;
+    }
+
+    /**
+     * @param $extension
+     * @return bool
+     */
+    public function dependsOn($extension){
+        var_dump($extension);exit;
+        return $this->dependencies->contains($extension);
     }
 
     /**

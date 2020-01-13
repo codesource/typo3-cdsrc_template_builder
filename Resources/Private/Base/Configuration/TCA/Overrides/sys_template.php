@@ -6,4 +6,6 @@
 
 
 // Load default extension template
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile('{|EXTENSION_KEY|}', 'Configuration/TypoScript', 'Default Template');
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
+ExtensionManagementUtility::addStaticFile('{|EXTENSION_KEY|}', 'Configuration/TypoScript', 'Default Template');

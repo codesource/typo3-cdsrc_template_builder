@@ -32,15 +32,18 @@ use CDSRC\CdsrcTemplateBuilder\Domain\Model\Template;
 use CDSRC\CdsrcTemplateBuilder\Exceptions\ExtensionCreationException;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
-use TYPO3\CMS\Core\Database\DatabaseConnection;
+//use TYPO3\CMS\Core\Database\DatabaseConnection;
+
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Page\PageRepository;
 
 class PageTreeCreatorService extends AbstractTemplateService
 {
     /**
-     * @var DatabaseConnection
+     * @var Connection
      */
     protected $database;
 
@@ -74,14 +77,16 @@ class PageTreeCreatorService extends AbstractTemplateService
         $this->dataHandler = GeneralUtility::makeInstance(DataHandler::class);
         $this->dataHandler->stripslashes_values = 0;
         // set default TCA values specific for the user
-        $TCADefaultOverride = $this->beUser->getTSConfigProp('TCAdefaults');
-        if (is_array($TCADefaultOverride)) {
-            $this->dataHandler->setDefaultsFromUserTS($TCADefaultOverride);
-        }
+//        $TCADefaultOverride = $this->beUser->getTSConfigProp('TCAdefaults');
+//        if (is_array($TCADefaultOverride)) {
+//            $this->dataHandler->setDefaultsFromUserTS($TCADefaultOverride);
+//        }
     }
 
     /**
      * Create page tree and join extension
+     *
+     * @throws ExtensionCreationException
      */
     public function execute()
     {
@@ -109,11 +114,27 @@ class PageTreeCreatorService extends AbstractTemplateService
      * @throws ExtensionCreationException
      */
     protected function updateTree(){
-        $pages = BackendUtility::getRecordsByField('pages', 'crdate', $this->now, ' AND pid=0 AND cruser_id = ' . $this->beUser->user['uid']);
+        $parameters = [
+            'now' => $this->now,
+            'user' => $this->beUser->user['uid'],
+        ];
+        $pages = $this->getQueryBuilderForTable('pages')
+            ->select('p.*')
+            ->from('pages', 'p')
+            ->where('p.crdate = :now AND p.pid=0 AND p.cruser_id= :user')
+            ->setParameters($parameters)
+            ->execute()
+            ->fetchAll();
         if(count($pages) !== 1){
             throw new ExtensionCreationException('Unable to retrieve root page.', 1445527263);
         }
-        $backendLayouts = BackendUtility::getRecordsByField('backend_layout', 'crdate', $this->now, ' AND cruser_id = ' . $this->beUser->user['uid']);
+        $backendLayouts = $this->getQueryBuilderForTable('backend_layout')
+            ->select('l.*')
+            ->from('backend_layout', 'l')
+            ->where('l.crdate = :now AND l.cruser_id= :user')
+            ->setParameters($parameters)
+            ->execute()
+            ->fetchAll();
         if(count($backendLayouts) === 0){
             throw new ExtensionCreationException('Unable to retrieve default backend layout.', 1445527264);
         }
@@ -126,6 +147,15 @@ class PageTreeCreatorService extends AbstractTemplateService
         if($this->dataHandler->process_datamap() === FALSE){
             throw new ExtensionCreationException('Unable to update page tree.', 1445527265);
         }
+    }
+
+    /**
+     * @param string $table
+     * @return QueryBuilder
+     */
+    protected function getQueryBuilderForTable($table)
+    {
+        return GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($table);
     }
 
     /**

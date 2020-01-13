@@ -4,12 +4,15 @@
  */
 
 // Load dynamically PageTS
-$extensionPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('{|EXTENSION_KEY|}');
-$pagesTS = \TYPO3\CMS\Core\Utility\GeneralUtility::getFilesInDir($extensionPath . 'Configuration/PageTS', 'txt', TRUE, '', '^_.*$');
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+$extensionPath = ExtensionManagementUtility::extPath('{|EXTENSION_KEY|}');
+$pagesTS = GeneralUtility::getFilesInDir($extensionPath . 'Configuration/PageTS', 'txt', TRUE, '', '^_.*$');
 foreach ($pagesTS as $file) {
     $name = ucwords(preg_replace('/[^a-z0-9]/i', ' ', pathinfo($file, PATHINFO_FILENAME)));
     $path = substr($file, strlen($extensionPath));
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
+    ExtensionManagementUtility::registerPageTSConfigFile(
         '{|EXTENSION_KEY|}',
         $path,
         $name . ' configuration'

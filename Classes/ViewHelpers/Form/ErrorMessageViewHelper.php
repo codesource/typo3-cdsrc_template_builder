@@ -20,15 +20,14 @@ namespace CDSRC\CdsrcTemplateBuilder\ViewHelpers\Form;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ******************************************************************** */
 
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface;
+use Closure;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * View helper which render content if form property has error
  */
-class ErrorMessageViewHelper extends AbstractViewHelper implements CompilableInterface {
+class ErrorMessageViewHelper extends AbstractViewHelper {
 
 
 	/**
@@ -53,12 +52,11 @@ class ErrorMessageViewHelper extends AbstractViewHelper implements CompilableInt
      * for a detailed description of this method.
      *
      * @param array $arguments
-     * @param \Closure $renderChildrenClosure
+     * @param Closure $renderChildrenClosure
      * @param RenderingContextInterface $renderingContext
      * @return mixed
-     * @see \TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface
      */
-    static public function renderStatic(array $arguments, \Closure $renderChildrenClosure = null, RenderingContextInterface $renderingContext = null) {
+    static public function renderStatic(array $arguments, Closure $renderChildrenClosure = null, RenderingContextInterface $renderingContext = null) {
         $result = $renderingContext
 				->getControllerContext()
 				->getRequest()
