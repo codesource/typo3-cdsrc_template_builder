@@ -69,7 +69,7 @@ class ExtensionCreatorService extends AbstractTemplateService
             '{|EXTENSION_KEY|}' => $this->template->getKey(),
             '{|EXTENSION_PATH|}' => 'EXT:' . substr(
                     realpath(ExtensionManagementUtility::extPath('cdsrc_template_builder') . '../' . $this->template->getKey()),
-                    strlen(PATH_site)
+                    strlen(Environment::getPublicPath())
                 ),
             '{|EXTENSION_NAME|}' => $this->template->getName(),
             '{|EXTENSION_DESCRIPTION|}' => $this->template->getDescription(),
@@ -191,13 +191,13 @@ class ExtensionCreatorService extends AbstractTemplateService
         $content = file_get_contents($filename);
         if ($content === false) {
             throw new ExtensionCreationException('Unable to read file \'' . substr($filename,
-                    strlen(PATH_site)) . '\'.', 1445515212);
+                    strlen(Environment::getPublicPath())) . '\'.', 1445515212);
         }
         if (file_put_contents($filename,
                 str_replace($this->substitutionKeys, $this->substitutionData, $content)) === false
         ) {
             throw new ExtensionCreationException('Unable to substitute data in file \'' . substr($filename,
-                    strlen(PATH_site)) . '\'.', 1445515213);
+                    strlen(Environment::getPublicPath())) . '\'.', 1445515213);
         }
     }
 

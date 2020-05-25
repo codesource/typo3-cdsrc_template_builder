@@ -15,7 +15,7 @@ $EM_CONF[$_EXTKEY] = array (
 	'description' => 'Create a template extension to integrate a website based on a template',
 	'category' => 'be',
 	'shy' => false,
-	'version' => '0.3.0',
+	'version' => '0.3.1',
 	'dependencies' => '',
 	'conflicts' => '',
 	'priority' => '',
@@ -36,7 +36,7 @@ $EM_CONF[$_EXTKEY] = array (
 	array (
 		'depends' =>
 		array (
-			'typo3' => '9.0.0-10.2.99',
+			'typo3' => '9.0.0-10.4.99',
 		),
 		'conflicts' =>
 		array (
